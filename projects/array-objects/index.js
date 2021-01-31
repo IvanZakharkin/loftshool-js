@@ -84,6 +84,7 @@ function createProxy(obj) {
         target[prop] = val * val;
         return true;
       }
+      throw new Error(`${val} is not a number`);
     },
   });
 
