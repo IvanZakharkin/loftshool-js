@@ -44,7 +44,7 @@ function map(array, fn) {
    reduce([1, 2, 3], (all, current) => all + current) // 6
  */
 function reduce(array, fn, initial) {
-  const noInitial = initial === undefined;
+  const noInitial = initial === undefined || initial === null;
   let result = noInitial ? array[0] : initial;
 
   for (let i = noInitial ? 1 : 0; i < array.length; i += 1) {
@@ -80,8 +80,10 @@ function upperProps(obj) {
 function createProxy(obj) {
   const proxyObj = new Proxy(obj, {
     set(target, prop, val) {
-      target[prop] = val ** 2;
-      return true;
+      if ((typeof val === 'number' || typeof val === 'bigint') && !Number.isNaN(val)) {
+        target[prop] = val * val;
+        return true;
+      }
     },
   });
 
