@@ -103,7 +103,7 @@ function findError(where) {
  */
 function deleteTextNodes(where) {
   return Array.from(where.childNodes)
-    .filter((node) => node.nodeType === 3)
+    .filter((node) => node.nodeType === Node.TEXT_NODE)
     .forEach((node) => node.remove());
 }
 
@@ -127,7 +127,7 @@ function deleteTextNodesRecursive(where) {
         newAcc = [...newAcc, ...getTextNodes(el)];
       }
 
-      if (el.nodeType === 3) {
+      if (el.nodeType === Node.TEXT_NODE) {
         newAcc.push(el);
       }
 
@@ -171,7 +171,7 @@ function collectDOMStat(root) {
         collectNodeStat(childeNode);
       }
 
-      if (childeNode.nodeType === 3) {
+      if (childeNode.nodeType === Node.TEXT_NODE) {
         acc.texts += 1;
       } else {
         if (!acc.tags[childeNode.tagName]) {
