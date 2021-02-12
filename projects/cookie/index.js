@@ -67,8 +67,6 @@ function createCookie() {
   if (!addNameInput.value) return;
 
   document.cookie = `${addNameInput.value}=${addValueInput.value}`;
-  // addNameInput.value = '';
-  // addValueInput.value = '';
 
   updateCookies();
 }
@@ -123,13 +121,9 @@ function handlerFilterNameInput(e) {
 function handlerAddButton() {
   createCookie();
 }
-// function handlerAddButton () {
-//   createCookie();
-// }
 
 filterNameInput.addEventListener('input', handlerFilterNameInput);
 
 addButton.addEventListener('click', handlerAddButton);
 
-// updateCookies();
-// listTable.addEventListener('click', (e) => {});
+updateCookies();
