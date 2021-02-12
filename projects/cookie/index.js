@@ -84,30 +84,36 @@ function removeCookie({ name, value }) {
   updateCookies();
 }
 
+function createTr(cookie) {
+  const tr = document.createElement('tr');
+  const tdName = document.createElement('td');
+  const tdValue = document.createElement('td');
+  const tdBtn = document.createElement('td');
+  const btn = document.createElement('button');
+  const handlerBtnRemoveCookie = () => {
+    removeCookie(cookie);
+  };
+
+  tdName.textContent = cookie.name;
+  tdValue.textContent = cookie.value;
+  btn.textContent = 'удалить';
+
+  btn.addEventListener('click', handlerBtnRemoveCookie);
+
+  tr.append(tdName);
+  tr.append(tdValue);
+  tr.append(tdBtn);
+  tdBtn.append(btn);
+
+  return tr;
+}
+
 function renderCookies(cookies) {
   listTable.innerHTML = '';
   const fragment = document.createDocumentFragment();
 
   cookies.forEach((cookie) => {
-    const tr = document.createElement('tr');
-    const tdName = document.createElement('td');
-    const tdValue = document.createElement('td');
-    const tdBtn = document.createElement('td');
-    const btn = document.createElement('button');
-    const handlerBtnRemoveCookie = () => {
-      removeCookie(cookie);
-    };
-
-    tdName.textContent = cookie.name;
-    tdValue.textContent = cookie.value;
-    btn.textContent = 'удалить';
-
-    btn.addEventListener('click', handlerBtnRemoveCookie);
-
-    tr.append(tdName);
-    tr.append(tdValue);
-    tr.append(tdBtn);
-    tdBtn.append(btn);
+    const tr = createTr(cookie);
     fragment.append(tr);
   });
 
